@@ -5,7 +5,7 @@ import Spline from '@splinetool/react-spline';
 
 export default function Hero() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
+    <div className="relative w-screen min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
       {/* 3D Background Animation */}
       <div className="absolute inset-0 ">
         <Spline scene="https://prod.spline.design/SCR3stcLmc59o21q/scene.splinecode" />
