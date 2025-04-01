@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ShoppingCart, Search, User } from 'lucide-react';
+import Link from 'next/link';
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,17 +16,15 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="/" className="text-2xl font-bold text-white">
-              FutureShop
+              ShopVerse
             </a>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Home</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Shop</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Categories</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">About</a>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a>
+            <Link href="#"className="text-gray-300 hover:text-white transition-colors">Home</Link>
+            <Link href="#"className="text-gray-300 hover:text-white transition-colors">About</Link>
+            <Link href="#"className="text-gray-300 hover:text-white transition-colors">Contact</Link>
           </div>
 
           {/* Desktop Icons */}
