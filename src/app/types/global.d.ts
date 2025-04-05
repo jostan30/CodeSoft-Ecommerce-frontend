@@ -1,5 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 export {};
 
 interface RazorpayOptions {
@@ -28,9 +26,21 @@ interface RazorpayOptions {
   };
 }
 
+interface RazorpayPaymentFailedResponse {
+  code: string;
+  description: string;
+  source: string;
+  step: string;
+  reason: string;
+  metadata: {
+    order_id: string;
+    payment_id: string;
+  };
+}
+
 interface RazorpayInstance {
   open(): void;
-  on(event: string, handler: (response: any) => void): void;
+  on(event: string, handler: (response: RazorpayPaymentFailedResponse | unknown) => void): void;
   close(): void;
 }
 
