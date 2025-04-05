@@ -1,4 +1,5 @@
-// types/global.d.ts
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export {};
 
 interface RazorpayOptions {
