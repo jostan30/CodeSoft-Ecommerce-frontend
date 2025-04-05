@@ -3,6 +3,14 @@
 import React from 'react';
 import axios from 'axios';
 
+interface RazorpayResponse {
+    razorpay_payment_id: string; 
+    razorpay_order_id:string;
+    razorpay_signature:string;
+    
+}
+
+
 const loadRazorpayScript = () => {
     return new Promise((resolve) => {
         const script = document.createElement('script');
@@ -12,6 +20,7 @@ const loadRazorpayScript = () => {
         document.body.appendChild(script);
     });
 };
+
 
 
 const RazorpayTest = () => {
@@ -28,7 +37,7 @@ const RazorpayTest = () => {
             const keyRes = await axios.get(`${backendUrl}/api/payments/key`);
             const razorpayKey = keyRes.data.key;
             //order id
-            const mongodborderid = '67effdc4d89597df2a8df3b6';
+            const mongodborderid = '67effdc4d89597df2a8df3b6'; // Add the product id here 
 
             // 2. Create order on backend
             const orderRes = await axios.post(`${backendUrl}/api/payments/create-order`, {
@@ -46,7 +55,7 @@ const RazorpayTest = () => {
                 name: 'Test Payment',
                 description: 'Testing Razorpay Integration',
                 order_id: razorpay_order_id,
-                handler: async (response: any) => {
+                handler: async (response: RazorpayResponse) => {
                     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
 
                     // 4. Send verification request to backend
@@ -69,7 +78,7 @@ const RazorpayTest = () => {
                 }
             };
 
-            const razorpay = new (window as any).Razorpay(options);
+            const razorpay = new window.Razorpay(options);
             razorpay.open();
         } catch (error) {
             console.error(error);
