@@ -83,7 +83,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <motion.button
               onClick={() =>{
-                isLoggedIn ? window.location.href = "/shop" : toast.error("You are not authorized to view this page. Please log in.", {duration:3000})
+                isLoggedIn ? (window.location.href = "/shop" ): (toast.error("You are not authorized to view this page. Please log in.", {duration:3000}))
               }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -95,7 +95,7 @@ export default function Hero() {
             
             <motion.button
               onClick={() => {
-               isLoggedIn ? role === "seller" ? window.location.href="/seller" :window.location.href="/BecomeSeller" : toast.error("You are not authorized to view this page. Please log in.", {duration:3000})
+               isLoggedIn ? (role === "seller" ? window.location.href="/seller" :window.location.href="/BecomeSeller") : (toast.error("You are not authorized to view this page. Please log in.", {duration:3000}))
               }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

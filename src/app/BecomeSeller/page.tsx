@@ -177,7 +177,7 @@ export default function BecomeSeller() {
               </CardHeader>
               <CardContent className="relative">
                 <blockquote className="italic text-slate-300">
-                  "I started selling my handcrafted items as a side hustle, and within 6 months I was able to quit my day job. The platform&apos;s tools made scaling my business incredibly easy."
+                &quot;I started selling my handcrafted items as a side hustle, and within 6 months I was able to quit my day job. The platform&apos;s tools made scaling my business incredibly easy.&quot;
                 </blockquote>
                 <div className="mt-4 flex items-center">
                   <div className="h-10 w-10 rounded-full bg-slate-700"></div>
