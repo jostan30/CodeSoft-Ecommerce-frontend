@@ -2,8 +2,43 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, ArrowRight, Smartphone, Shield, Truck, HeadphonesIcon } from 'lucide-react';
 import Spline from '@splinetool/react-spline';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { toast } from 'sonner';
 
 export default function Hero() {
+  const [isLoggedIn , setIsLoggedIn] = useState(false);
+  const [role ,setRole] = useState("");
+  const [name , setName] = useState("");
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        if (typeof window === "undefined") return;
+  
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setIsLoggedIn(false);
+          return;
+        }
+        const response = await axios.get("http://localhost:5050/api/auth/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });   
+        setIsLoggedIn(response.data.success);
+        if(response.data.user) {
+          setRole(response.data.user.role);
+          setName(response.data.user.name);
+        }
+      } catch (error) {
+        setIsLoggedIn(false);
+      }
+    };
+  
+    checkLoginStatus();
+  }, []);
+
   return (
     <div className="relative w-screen min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black overflow-hidden">
       {/* 3D Background Animation */}
@@ -29,6 +64,7 @@ export default function Hero() {
             className="inline-block mb-6"
           >
             <span className="px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium border border-blue-500/20">
+            {name ? `Hello ${name} ` : ""}
               Welcome to the Future of E-commerce
             </span>
           </motion.div>
@@ -44,6 +80,9 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <motion.button
+              onClick={() =>{
+                isLoggedIn ? window.location.href = "/shop" : toast.error("You are not authorized to view this page. Please log in.", {duration:3000})
+              }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
@@ -53,11 +92,14 @@ export default function Hero() {
             </motion.button>
             
             <motion.button
+              onClick={() => {
+               isLoggedIn ? role === "seller" ? window.location.href="/seller" :window.location.href="/BecomeSeller" : toast.error("You are not authorized to view this page. Please log in.", {duration:3000})
+              }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group flex items-center justify-center gap-2 bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300"
+              className="group flex items-center justify-center gap-2 bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer"
             >
-              Learn More
+              {role === "seller" ? "SellerDashboard" : "Become a Seller"}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
           </div>
