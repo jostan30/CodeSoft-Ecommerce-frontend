@@ -61,8 +61,10 @@ export function Auth() {
   const handleSignup = async () => {
     try {
       const res = await axios.post("http://localhost:5050/api/auth/register", signupData);
-      toast("Signup success",{description:"Login now!!" ,duration: 3000 });
-      // Handle post-signup logic here
+      if(res.data.success) {
+        toast("Signup success",{description:"Login now!!" ,duration: 3000 });
+        }
+      
     } catch (err) {
       if(axios.isAxiosError(err)) {
         toast.error("Signup failed:",{duration: 3000 });

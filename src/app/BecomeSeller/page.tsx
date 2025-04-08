@@ -15,11 +15,11 @@ import { useAuth } from "@/lib/useAuth";
 
 export default function BecomeSeller() {
   const [submitted, setSubmitted] = useState(false);
+  const token = useAuth();
   
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
     try {
-        const token = useAuth();
         const formData = new FormData(e.currentTarget as HTMLFormElement);
         const store = formData.get("store");
         const description = formData.get("description");
@@ -31,7 +31,8 @@ export default function BecomeSeller() {
           },
         }
       );
-        toast.success("Application submitted successfully!", { duration: 3000});
+      const name = response.data.user.name;
+        toast.success(`Hello ${name} your application submitted successfully!`, { duration: 3000});
         setSubmitted(true);
         setTimeout(() => {
           window.location.href = "/";
@@ -63,7 +64,7 @@ export default function BecomeSeller() {
               <Alert className="bg-emerald-900/30 border-emerald-600 mb-6">
                 <AlertTitle className="text-emerald-400">Application received!</AlertTitle>
                 <AlertDescription>
-                  Thanks for applying to become a seller. We'll review your information and get back to you within 24 hours.
+                  Thanks for applying to become a seller. We&apos;ll review your information and get back to you within 24 hours.
                 </AlertDescription>
               </Alert>
             ) : null}
@@ -92,7 +93,7 @@ export default function BecomeSeller() {
                     </div>
                     
                     <div className="grid gap-3">
-                      <Label htmlFor="description">Tell us about what you'll be selling</Label>
+                      <Label htmlFor="description">Tell us about what you&apos;ll be selling</Label>
                       <textarea 
                         id="description" 
                         name="description"
@@ -176,7 +177,7 @@ export default function BecomeSeller() {
               </CardHeader>
               <CardContent className="relative">
                 <blockquote className="italic text-slate-300">
-                  "I started selling my handcrafted items as a side hustle, and within 6 months I was able to quit my day job. The platform's tools made scaling my business incredibly easy."
+                  "I started selling my handcrafted items as a side hustle, and within 6 months I was able to quit my day job. The platform&apos;s tools made scaling my business incredibly easy."
                 </blockquote>
                 <div className="mt-4 flex items-center">
                   <div className="h-10 w-10 rounded-full bg-slate-700"></div>
