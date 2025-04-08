@@ -82,9 +82,14 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <motion.button
-              onClick={() =>{
-                isLoggedIn ? (window.location.href = "/shop" ): (toast.error("You are not authorized to view this page. Please log in.", {duration:3000}))
+              onClick={() => {
+                if (isLoggedIn) {
+                  window.location.href = "/shop";
+                } else {
+                  toast.error("You are not authorized to view this page. Please log in.", { duration: 3000 });
+                }
               }}
+              
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
@@ -95,8 +100,17 @@ export default function Hero() {
             
             <motion.button
               onClick={() => {
-               isLoggedIn ? (role === "seller" ? window.location.href="/seller" :window.location.href="/BecomeSeller") : (toast.error("You are not authorized to view this page. Please log in.", {duration:3000}))
+                if (isLoggedIn) {
+                  if (role === "seller") {
+                    window.location.href = "/seller";
+                  } else {
+                    window.location.href = "/BecomeSeller";
+                  }
+                } else {
+                  toast.error("You are not authorized to view this page. Please log in.", { duration: 3000 });
+                }
               }}
+              
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center justify-center gap-2 bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-lg font-semibold border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer"
