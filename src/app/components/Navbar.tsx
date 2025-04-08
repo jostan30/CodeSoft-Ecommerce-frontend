@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Auth } from './Auth';
 import { Dialog, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
 import { DialogContent } from '@/components/ui/dialog';
+import { toast } from 'sonner';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +33,7 @@ export default function Navbar() {
         });
         setIsLoggedIn(response.data.success);
       } catch (error) {
+        toast.error(`Error checking login status: ${error instanceof Error ? error.message : String(error)}`);
         setIsLoggedIn(false);
       }
     };
@@ -128,8 +130,4 @@ export default function Navbar() {
       </motion.div>
     </nav>
   );
-}
-
-function async() {
-  throw new Error('Function not implemented.');
 }

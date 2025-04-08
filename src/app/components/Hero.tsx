@@ -1,3 +1,4 @@
+// @typescript-eslint/no-unused-expressions
 'use client'
 import { motion } from 'framer-motion';
 import { ShoppingBag, ArrowRight, Smartphone, Shield, Truck, HeadphonesIcon } from 'lucide-react';
@@ -32,6 +33,7 @@ export default function Hero() {
           setName(response.data.user.name);
         }
       } catch (error) {
+        toast.error(`Error checking login status: ${error instanceof Error ? error.message : String(error)}`);
         setIsLoggedIn(false);
       }
     };

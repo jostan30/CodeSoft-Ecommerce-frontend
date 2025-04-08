@@ -42,7 +42,6 @@ export function Auth() {
         email: loginEmail,
         password: loginPassword,
       });
-      console.log(res.data);
       const token = res.data.token;
       localStorage.setItem("token", token);
       toast("Login success");
