@@ -36,7 +36,7 @@ export default function AddProductPage() {
       formData.append("description", description)
       if (image) formData.append("image", image)
       
-        for (let [key, value] of formData.entries()) {
+        for (const [key, value] of formData.entries()) {
           console.log(`${key}:`, value)
         }
         
@@ -46,10 +46,11 @@ export default function AddProductPage() {
           "Content-Type": "multipart/form-data",
         },
       })
-
-      toast.success("Success", {
-        description: "Product has been added successfully.",
-      })
+      if(res.data.success) {
+        toast.success("Success", {
+          description: "Product has been added successfully.",
+        })
+      }
 
       router.push("/seller/product")
     } catch (error) {
