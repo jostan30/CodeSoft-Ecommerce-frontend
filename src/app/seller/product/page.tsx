@@ -25,6 +25,7 @@ import Link from "next/link"
 import axios from "axios"
 import { useAuth } from "@/lib/useAuth"
 import DeleteProduct from "@/app/components/DeleteProduct"
+import Image from "next/image"
 
 interface Product {
   _id: string
@@ -50,7 +51,9 @@ export default function ProductsPage() {
             "Authorization": `Bearer ${token}`,
           },
         })
-        setProducts(res.data.data)
+        if(res.data.status === "success") {
+          setProducts(res.data.data)
+        }
       } catch (err) {
         console.error("Failed to fetch products", err)
       }
@@ -103,7 +106,7 @@ export default function ProductsPage() {
                 {
                   product.image ? (
 
-                    <img
+                    <Image
                       src={`data:image/jpeg;base64,${product.image}`}
                       alt={product.name}
                       className="h-30 w-30 object-cover rounded"
