@@ -60,7 +60,7 @@ export default function ProductsPage() {
     }
 
     fetchProducts()
-  }, [])
+  }, [token])
 
   return (
     <div className="p-8">
