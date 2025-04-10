@@ -25,7 +25,6 @@ import Link from "next/link"
 import axios from "axios"
 import { useAuth } from "@/lib/useAuth"
 import DeleteProduct from "@/app/components/DeleteProduct"
-import Image from "next/image"
 import UpdateProduct from "@/app/components/UpdateProduct"
 
 interface Product {
@@ -65,7 +64,7 @@ export default function ProductsPage() {
         window.location.reload();
 
     }
-  }, [token])
+  }, [token,products.length])
 
   return (
     <div className="p-8">

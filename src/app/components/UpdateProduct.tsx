@@ -15,9 +15,7 @@ import {
 import { useAuth } from "@/lib/useAuth"
 import axios from "axios"
 import { toast } from "sonner"
-import { useRouter } from "next/navigation"
 import { Textarea } from "@/components/ui/textarea"
-import Image from "next/image"
 
 interface Product {
     _id: string
@@ -30,7 +28,6 @@ interface Product {
 }
 
 const UpdateProduct = ({ product }: { product: Product }) => {
-    const router = useRouter()
     const token = useAuth()
 
     const [loading, setLoading] = useState(false)
@@ -107,7 +104,7 @@ const UpdateProduct = ({ product }: { product: Product }) => {
                 <SheetHeader>
                     <SheetTitle>Update Product Details</SheetTitle>
                     <SheetDescription>
-                        Modify the product fields below and click "Save changes".
+                        Modify the product fields below and click &ldquo;Save changes&ldquo;.
                     </SheetDescription>
                 </SheetHeader>
                 <form onSubmit={handleSubmit} className="space-y-6">
