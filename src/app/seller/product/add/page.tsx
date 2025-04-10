@@ -11,6 +11,8 @@ import axios from "axios"
 import { toast } from "sonner"
 import { useAuth } from "@/lib/useAuth"
 
+
+
 export default function AddProductPage() {
   const router = useRouter()
   const token = useAuth()

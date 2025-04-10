@@ -26,6 +26,7 @@ import axios from "axios"
 import { useAuth } from "@/lib/useAuth"
 import DeleteProduct from "@/app/components/DeleteProduct"
 import Image from "next/image"
+import UpdateProduct from "@/app/components/UpdateProduct"
 
 interface Product {
   _id: string
@@ -51,7 +52,7 @@ export default function ProductsPage() {
             "Authorization": `Bearer ${token}`,
           },
         })
-        if(res.data.status === "success") {
+        if(res.data.success) {
           setProducts(res.data.data)
         }
       } catch (err) {
@@ -60,6 +61,10 @@ export default function ProductsPage() {
     }
 
     fetchProducts()
+    if(products.length !== 0) {
+        window.location.reload();
+
+    }
   }, [token])
 
   return (
@@ -106,7 +111,7 @@ export default function ProductsPage() {
                 {
                   product.image ? (
 
-                    <Image
+                    <img
                       src={`data:image/jpeg;base64,${product.image}`}
                       alt={product.name}
                       className="h-30 w-30 object-cover rounded"
@@ -128,7 +133,10 @@ export default function ProductsPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-[200px]">
                     <DropdownMenuGroup>
-                    <DropdownMenuItem className="cursor-pointer">Update</DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                      {/* UpdateProduct component */}
+                      <UpdateProduct  product={product} />
+                    </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem asChild className="cursor-pointer">
                          {/* DeleteProduct component */}

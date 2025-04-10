@@ -29,6 +29,7 @@ const DeleteProduct = (productid :{productid:string}) => {
             if(res.data.success) {
                 toast.success("Product deleted successfully")
             }
+            window.location.reload();
         } catch (error) {
             toast.error("Failed to delete product")
             console.error("Error deleting product:", error);
