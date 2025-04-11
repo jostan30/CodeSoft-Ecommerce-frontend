@@ -37,18 +37,18 @@ export default function AddProductPage() {
       formData.append("quantity", stock)
       formData.append("description", description)
       if (image) formData.append("image", image)
-      
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}:`, value)
-        }
-        
+
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value)
+      }
+
       const res = await axios.post("http://localhost:5050/api/products", formData, {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
       })
-      if(res.data.success) {
+      if (res.data.success) {
         toast.success("Success", {
           description: "Product has been added successfully.",
         })
@@ -84,7 +84,24 @@ export default function AddProductPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="category">Category</Label>
-              <Input id="category" name="category" value={category} onChange={e => setCategory(e.target.value)} required />
+              <select
+                id="category"
+                name="category"
+                value={category}
+                onChange={e => setCategory(e.target.value)}
+                required
+                className="w-full px-3 py-2 rounded-md border bg-white dark:bg-[#1a1a1a] text-[#737373] border-[#737373] dark:border-[#737373] dark:text-[#737373] focus:outline-none focus:ring-2 focus:ring-[#737373] "
+              >
+                <option value="" disabled>Select category</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Food">Food</option>
+                <option value="Books">Books</option>
+                <option value="Home">Home</option>
+                <option value="Beauty">Beauty</option>
+                <option value="Sports">Sports</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <div className="space-y-2">
               <Label htmlFor="stock">Stock</Label>
@@ -99,10 +116,10 @@ export default function AddProductPage() {
               <Input id="image" name="image" type="file" accept="image/*" onChange={e => setImage(e.target.files?.[0] || null)} required />
             </div>
             <div className="flex gap-4">
-              <Button type="submit" disabled={loading}>
+              <Button type="submit" disabled={loading} className="cursor-pointer">
                 {loading ? "Adding..." : "Add Product"}
               </Button>
-              <Button type="button" variant="outline" onClick={() => router.push("/seller/products")}>
+              <Button className="cursor-pointer" type="button" variant="outline" onClick={() => router.push("/seller/products")}>
                 Cancel
               </Button>
             </div>

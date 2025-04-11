@@ -92,9 +92,9 @@ export default function Hero() {
               
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300"
+              className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 cursor-pointer"
             >
-              <ShoppingBag className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+              <ShoppingBag className="w-5 h-5 group-hover:rotate-12 transition-transform " />
               Explore Collection
             </motion.button>
             

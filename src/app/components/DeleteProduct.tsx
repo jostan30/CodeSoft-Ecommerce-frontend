@@ -38,7 +38,7 @@ const DeleteProduct = (productid :{productid:string}) => {
     return (
         <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button variant="ghost" className="text-red-500">Delete</Button>
+          <Button variant="ghost" className="text-red-500 cursor-pointer w-full justify-center">Delete</Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>

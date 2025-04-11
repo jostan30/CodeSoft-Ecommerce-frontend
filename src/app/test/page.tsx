@@ -37,7 +37,7 @@ const RazorpayTest = () => {
             const keyRes = await axios.get(`${backendUrl}/api/payments/key`);
             const razorpayKey = keyRes.data.key;
             //order id
-            const mongodborderid = '67effdc4d89597df2a8df3b6'; // Add the product id here 
+            const mongodborderid = '67effdc4d89597df2a8df3b6'; // Add the order id here 
 
             // 2. Create order on backend
             const orderRes = await axios.post(`${backendUrl}/api/payments/create-order`, {

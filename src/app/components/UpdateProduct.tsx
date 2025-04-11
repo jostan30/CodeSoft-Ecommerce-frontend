@@ -98,7 +98,7 @@ const UpdateProduct = ({ product }: { product: Product }) => {
     return (
         <Sheet  >
             <SheetTrigger asChild>
-                <Button variant="ghost">Update</Button>
+                <Button variant="ghost" className="cursor-pointer justify-center w-full">Update</Button>
             </SheetTrigger>
             <SheetContent className=" px-2 overflow-y-auto" >
                 <SheetHeader>
@@ -155,16 +155,13 @@ const UpdateProduct = ({ product }: { product: Product }) => {
 
                     </div>
                     <div className="flex gap-4">
-                        <Button type="submit" disabled={loading}>
+                        <Button type="submit" disabled={loading} className="w-[70%] cursor-pointer">
                             {loading ? "Saving..." : "Saving Changes"}
                         </Button>
 
                     </div>
                 </form>
                 <SheetFooter>
-                    <SheetClose asChild>
-
-                    </SheetClose>
                 </SheetFooter>
             </SheetContent>
         </Sheet>

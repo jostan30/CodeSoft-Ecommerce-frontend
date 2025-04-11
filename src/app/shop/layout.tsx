@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 import ProtectedComponent from "../components/ProtectComponents";
-
+import UserNavbar from "../components/UserNavbar";
+import { ThemeProvider } from "../components/theme-provider";
 
 export default function RootLayout({
   children,
@@ -10,10 +11,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Toaster/>
-        <ProtectedComponent>
-        {children}
-        </ProtectedComponent>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <Toaster />
+          <ProtectedComponent>
+            <UserNavbar />
+            {children}
+          </ProtectedComponent>
+        </ThemeProvider>
       </body>
     </html>
   );

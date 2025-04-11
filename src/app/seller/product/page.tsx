@@ -41,12 +41,11 @@ interface Product {
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const token = useAuth();
-  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5050/api/products", {
+        const res = await axios.get("http://localhost:5050/api/products/userproduct", {
           headers: {
             "Authorization": `Bearer ${token}`,
           },
@@ -64,7 +63,7 @@ export default function ProductsPage() {
         window.location.reload();
 
     }
-  }, [token,products.length])
+  }, [])
 
   return (
     <div className="p-8">
@@ -98,14 +97,14 @@ export default function ProductsPage() {
      
           { 
           products.length === 0 ? (
-            <TableRow>
+            <TableRow >
               <TableCell colSpan={6} className="text-center">
                 No products found
               </TableCell>
             </TableRow>
           ) : (
             products.map((product: Product) => (
-            <TableRow key={product._id}>
+            <TableRow className="cursor-pointer" key={product._id}>
               <TableCell>
                 {
                   product.image ? (
@@ -121,12 +120,12 @@ export default function ProductsPage() {
               </TableCell>
               <TableCell>{product.name}</TableCell>
               <TableCell>{product.category}</TableCell>
-              <TableCell>${product.price.toFixed(2)}</TableCell>
+              <TableCell>Rs {product.price.toFixed(2)}</TableCell>
               <TableCell>{product.quantity}</TableCell>
               <TableCell>
-                <DropdownMenu open={open} onOpenChange={setOpen}>
+                <DropdownMenu >
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="ghost"  size="sm" className="cursor-pointer">
                       <MoreHorizontal />
                     </Button>
                   </DropdownMenuTrigger>
