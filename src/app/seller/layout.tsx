@@ -2,7 +2,6 @@ import { Toaster } from "sonner";
 import ProtectedComponent from "../components/ProtectComponents";
 import { ThemeProvider } from "../components/theme-provider";
 import SidebarSeller from "../components/sidebarSeller";
-import { useAuth } from "@/lib/useAuth";
 
 
 export default function RootLayout({

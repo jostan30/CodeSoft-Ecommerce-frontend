@@ -26,7 +26,6 @@ const Checkout = () => {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [storeName ,setStoreName] =useState(''); // 
-    const [userId, setUserId] = useState(''); // You'll need to get the user ID from your auth system
     const router = useRouter();
 
     const totalAmount = getTotal();
@@ -52,7 +51,6 @@ const Checkout = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                setUserId(response.data.user._id);
                 setStoreName(response.data.user.storeName); // Assuming the response contains storeName
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -139,8 +137,7 @@ const Checkout = () => {
             );
            
             const orderId = orderResponse.data.data._id;
-            const StringOrderId:string = orderId.toString();
-
+          
             // Step 2: Load Razorpay SDK
             const res = await loadRazorpayScript();
 
