@@ -47,17 +47,15 @@ interface Order {
 const OrdersPage = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('all');
+  const token =useAuth();
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const token =useAuth();
         
         if (!token) {
-          setError('Please login to view your orders');
           setLoading(false);
           return;
         }
@@ -72,7 +70,6 @@ const OrdersPage = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching orders:', error);
-        setError('Failed to load orders. Please try again later.');
         setLoading(false);
       }
     };
