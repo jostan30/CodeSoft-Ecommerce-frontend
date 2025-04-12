@@ -42,7 +42,7 @@ export default function AddProductPage() {
         console.log(`${key}:`, value)
       }
 
-      const res = await axios.post("http://localhost:5050/api/products", formData, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, formData, {
         headers: {
           "Authorization": `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

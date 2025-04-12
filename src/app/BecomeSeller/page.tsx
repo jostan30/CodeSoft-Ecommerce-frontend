@@ -25,7 +25,7 @@ export default function BecomeSeller() {
         const description = formData.get("description");
         console.log(store, description);
 
-      const response = await axios.put("http://localhost:5050/api/auth/becomeseller",{ storeName:store, description:description },{
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/becomeseller`,{ storeName:store, description:description },{
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -71,7 +71,7 @@ const UpdateProduct = ({ product }: { product: Product }) => {
                 console.log(`${key}:`, value)
             }
 
-            const res = await axios.put(`http://localhost:5050/api/products/${product._id}`, formData, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${product._id}`, formData, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "multipart/form-data",

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useAuth } from "@/lib/useAuth";
 import { useCartStore } from "@/lib/cart-store";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface Product {
     _id: string
@@ -37,7 +38,7 @@ const Shop = () => {
         const fetchProducts = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get("http://localhost:5050/api/products", {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`, {
                     headers: {  
                         'Authorization': `Bearer ${token}`
                     }
@@ -101,6 +102,14 @@ const Shop = () => {
             quantity: product.quantity,
             image: product.image,
             brand: product.brand
+        });
+        toast.success(`${product.name} added to cart!`, {
+            duration: 3000,
+            description: `You have added ${product.name} to your cart.`,
+            action: {
+                label: 'View Cart',
+                onClick: () => window.location.href = '/shop/cart'
+            }
         });
     };
 

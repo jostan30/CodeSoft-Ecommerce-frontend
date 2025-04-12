@@ -21,7 +21,7 @@ const DeleteProduct = (productid :{productid:string}) => {
     const deleteproduct = async ()=>{
         try {
           
-            const res = await axios.delete(`http://localhost:5050/api/products/${productId}`, {
+            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products/${productId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

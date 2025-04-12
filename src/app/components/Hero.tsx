@@ -22,7 +22,7 @@ export default function Hero() {
           setIsLoggedIn(false);
           return;
         }
-        const response = await axios.get("http://localhost:5050/api/auth/me", {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

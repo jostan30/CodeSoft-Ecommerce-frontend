@@ -27,6 +27,9 @@ const Checkout = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [storeName ,setStoreName] =useState(''); // 
     const router = useRouter();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [contact, setContact] = useState('');
 
     const totalAmount = getTotal();
     const shipping = 40;
@@ -46,11 +49,14 @@ const Checkout = () => {
         // Get user ID - replace with your actual auth method
         const fetchUser = async () => {
             try {
-                const response = await axios.get('http://localhost:5050/api/auth/me', {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                setName(response.data.user.name); // Assuming the response contains user name
+                setEmail(response.data.user.email); // Assuming the response contains user email
+                setContact(response.data.user.phone); // Assuming the response contains user contact number
                 setStoreName(response.data.user.storeName); // Assuming the response contains storeName
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -126,7 +132,7 @@ const Checkout = () => {
             console.log('Order Data:', orderData);
 
             const orderResponse = await axios.post(
-                'http://localhost:5050/api/orders/',
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/`,
                 orderData,
                 {
                     headers: {
@@ -148,7 +154,7 @@ const Checkout = () => {
             }
 
             // Step 3: Get Razorpay key
-            const keyRes = await axios.get(`http://localhost:5050/api/payments/key`,{
+            const keyRes = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments/key`,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }
@@ -156,7 +162,7 @@ const Checkout = () => {
             const razorpayKey = keyRes.data.key;
 
             // Step 4: Create Razorpay order
-            const orderRes = await axios.post(`http://localhost:5050/api/payments/create-order`,{
+            const orderRes = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments/create-order`,{
                 amount: finalAmount,
                 currency: 'INR',
                 receipt: orderId,
@@ -181,7 +187,7 @@ const Checkout = () => {
 
                     // Step 6: Verify payment
                     try {
-                        await axios.post(`http://localhost:5050/api/payments/verify`, {
+                        await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments/verify`, {
                             razorpay_payment_id,
                             razorpay_order_id,
                             razorpay_signature,
@@ -195,16 +201,16 @@ const Checkout = () => {
                         // Step 7: Clear cart and redirect to success page
                         clearCart();
                         toast.success('Payment successful!');
-                        router.push(`/order-success/${orderId}`);
+                        router.push(`/shop/order`);
                     } catch (error) {
                         console.error('Payment verification failed:', error);
                         alert('Payment verification failed. Please contact support.');
                     }
                 },
                 prefill: {
-                    name: 'Customer Name', // You can add these fields to your form if needed
-                    email: 'customer@example.com',
-                    contact: '9999999999'
+                    name: name, // You can add these fields to your form if needed
+                    email: email,
+                    contact: contact
                 },
                 theme: {
                     color: '#3B82F6' // Blue color to match your UI

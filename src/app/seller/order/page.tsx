@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import { useAuth } from '@/lib/useAuth';
 
 interface OrderItem {
   name: string;
@@ -53,7 +54,7 @@ const OrdersPage = () => {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem('token');
+        const token =useAuth();
         
         if (!token) {
           setError('Please login to view your orders');
@@ -61,12 +62,12 @@ const OrdersPage = () => {
           return;
         }
 
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/`, {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/sellerOrder`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         });
-
+        console.log('Orders fetched:', response.data);
         setOrders(response.data);
         setLoading(false);
       } catch (error) {
@@ -115,25 +116,6 @@ const OrdersPage = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-900 text-gray-200 py-8">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-8 text-blue-400">My Orders</h1>
-          <div className="bg-gray-800 rounded-lg p-6 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 mx-auto text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <h2 className="text-xl font-semibold mb-2">Error</h2>
-            <p className="text-gray-400 mb-6">{error}</p>
-            <Link href="/" className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
-              Login
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (orders.length === 0) {
     return (

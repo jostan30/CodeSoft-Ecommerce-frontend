@@ -37,8 +37,7 @@ export function Auth() {
 
   const handleLogin = async () => {
     try {
-      
-      const res = await axios.post("http://localhost:5050/api/auth/login", {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`, {
         email: loginEmail,
         password: loginPassword,
       });
@@ -60,7 +59,7 @@ export function Auth() {
 
   const handleSignup = async () => {
     try {
-      const res = await axios.post("http://localhost:5050/api/auth/register", signupData);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`, signupData);
       if(res.data.success) {
         toast("Signup success",{description:"Login now!!" ,duration: 3000 });
         }
