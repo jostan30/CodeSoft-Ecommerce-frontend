@@ -27,11 +27,6 @@ const sidebarNavItems = [
     icon: ShoppingCart,
   },
   {
-    title: "Customers",
-    href: "/seller/customer",
-    icon: Users,
-  },
-  {
     title: "Settings",
     href: "/seller/setting",
     icon: Settings,

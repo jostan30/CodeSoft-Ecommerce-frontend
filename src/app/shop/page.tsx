@@ -18,7 +18,6 @@ interface Product {
     image?: string
     brand?: string
     unit?: string
-    weight?: string
     discount?: number
 }
 
@@ -55,7 +54,6 @@ const Shop = () => {
                         originalPrice,
                         discount,
                         unit: product.unit || "pc",
-                        weight: product.weight || `(approx. ${Math.floor(Math.random() * 200) + 400} to ${Math.floor(Math.random() * 200) + 600} g)`
                     };
                 });
                 
@@ -185,12 +183,12 @@ const Shop = () => {
                                 )}
                                 
                                 {/* Product image */}
-                                <div className="h-48 bg-gray-700 flex items-center justify-center p-2">
+                                <div className="h-48 w-full bg-gray-700 flex items-center justify-center p-2">
                                     {product.image ? (
                                         <img 
                                         src={`data:image/jpeg;base64,${product.image}`}
                                             alt={product.name} 
-                                            className=" object-cover"
+                                            className=" h-full w-full object-contain"
                                         />
                                     ) : (
                                         <div className="text-gray-500">No image available</div>
@@ -199,15 +197,14 @@ const Shop = () => {
                                 
                                 {/* Product info */}
                                 <div className="p-4">
-                                    {/* Brand */}
-                                    <p className="text-blue-400 text-sm mb-1">{product.brand}</p>
+                                   
                                     
                                     {/* Product name */}
                                     <h2 className="text-lg font-semibold text-gray-100 mb-2">{product.name}</h2>
                                     
                                     {/* Quantity/Weight info */}
                                     <div className="bg-gray-700 px-3 py-2 rounded mb-3">
-                                        <p className="text-sm text-gray-300">1 {product.unit} {product.weight}</p>
+                                        <p className="text-sm text-gray-300">1 {product.unit} </p>
                                     </div>
                                     
                                     {/* Price section */}
