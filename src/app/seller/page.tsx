@@ -14,12 +14,7 @@ import {
   ResponsiveContainer
 } from 'recharts'
 import { DollarSign, ShoppingBag, Package, Users } from "lucide-react"
-// Order Item (in case you need deeper typing later)
-interface OrderItem {
-  product: string;
-  price: number;
-  quantity: number;
-}
+
 
 // Order structure used in "recentOrders"
 export interface DashboardOrder {
