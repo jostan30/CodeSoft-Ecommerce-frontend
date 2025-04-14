@@ -30,10 +30,6 @@ interface PasswordData {
   confirm: string;
 }
 
-interface MessageData {
-  type: string;
-  text: string;
-}
 
 const CustomerSettings = () => {
   const token = useAuth();
