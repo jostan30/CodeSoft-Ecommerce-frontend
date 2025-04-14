@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { User, LogOut, Lock, Home, Phone, Mail, Edit, Save, AlertCircle } from 'lucide-react';
+import { User, LogOut, Lock, Home, Phone, Mail, Edit, Save } from 'lucide-react';
 import axios from 'axios';
 import { useAuth } from '@/lib/useAuth';
 import { toast } from 'sonner';
@@ -58,7 +58,6 @@ const CustomerSettings = () => {
     confirm: ''
   });
   const [loading, setLoading] = useState<boolean>(true);
-  const [message, setMessage] = useState<MessageData>({ type: '', text: '' });
   
   // Fetch user data on component mount
   useEffect(() => {
@@ -74,6 +73,7 @@ const CustomerSettings = () => {
         setEditedUser(userData);
         setLoading(false);
       } catch (error) {
+        console.log(error);
         toast.error("Error fetching user data");
       }
     };
@@ -166,6 +166,7 @@ const CustomerSettings = () => {
       
       toast.success("Password changed successfully");
     } catch (error) {
+      console.log(error);
       toast.error("Error changing password");
     } finally {
       setLoading(false);
@@ -197,14 +198,6 @@ const CustomerSettings = () => {
           </button>
         </div>
         
-        {message.text && (
-          <div className={`p-4 mb-6 rounded-lg flex items-center gap-2 ${
-            message.type === 'success' ? 'bg-green-800 text-green-100' : 'bg-red-800 text-red-100'
-          }`}>
-            <AlertCircle size={20} />
-            <span>{message.text}</span>
-          </div>
-        )}
         
         <div className="grid md:grid-cols-3 gap-8">
           <div className="col-span-2">
