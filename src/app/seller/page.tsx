@@ -70,22 +70,30 @@ interface RecentOrdersProps {
 // Component for the overview chart
 const Overview: React.FC<OverviewProps> = ({ data }) => {
   return (
-    <ResponsiveContainer width="100%" height={350}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip formatter={(value) => `$${value}`} />
-        <Line
-          type="monotone"
-          dataKey="revenue"
-          stroke="#3b82f6"
-          strokeWidth={2}
-          dot={{ r: 4 }}
-          activeDot={{ r: 6 }}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="bg-white dark:bg-gray-900 shadow-md rounded-2xl p-4 md:p-6 w-full h-[400px] " >
+      <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">Revenue Overview</h2>
+      <ResponsiveContainer width="100%" height="100%" >
+        <LineChart data={data} >
+          <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0"  />
+          <XAxis dataKey="name" stroke="#94a3b8" />
+          <YAxis stroke="#94a3b8" />
+          <Tooltip
+            formatter={(value) => `Rs${value}`} 
+            contentStyle={{ backgroundColor: "#1e293b", borderRadius: "8px", border: "none" }} 
+            labelStyle={{ color: "#f1f5f9" }} 
+            itemStyle={{ color: "#fbbf24" }}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="revenue" 
+            stroke="#3b82f6" 
+            strokeWidth={2} 
+            dot={{ r: 4, stroke: "#3b82f6", fill: "#fff"  }}
+            activeDot={{ r: 6 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 
