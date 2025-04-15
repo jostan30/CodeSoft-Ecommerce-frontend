@@ -159,6 +159,7 @@ const Checkout = () => {
                     Authorization: `Bearer ${token}`
                 }
             });
+           
             const razorpayKey = keyRes.data.key;
 
             // Step 4: Create Razorpay order

@@ -84,12 +84,16 @@ export default function Hero() {
             <motion.button
               onClick={() => {
                 if (isLoggedIn) {
-                  window.location.href = "/shop";
+                  if (role === "seller") {
+                    toast("You can expolre collection but cannot buy products", { duration: 3000 });
+                  }
+                  setTimeout(() => {
+                    window.location.href = "/shop";
+                  }, 3000);
                 } else {
                   toast.error("You are not authorized to view this page. Please log in.", { duration: 3000 });
                 }
-              }}
-              
+              }}              
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="group flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 cursor-pointer"
