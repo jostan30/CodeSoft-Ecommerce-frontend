@@ -268,7 +268,7 @@ const Checkout = () => {
                         </svg>
                         <h2 className="text-xl font-semibold mb-2">Your cart is empty</h2>
                         <p className="text-gray-400 mb-6">Add some products to your cart before proceeding to checkout</p>
-                        <Link href="/products" className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
+                        <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300">
                             Browse Products
                         </Link>
                     </div>
