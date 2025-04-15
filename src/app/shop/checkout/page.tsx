@@ -16,6 +16,7 @@ interface RazorpayResponse {
 
 const Checkout = () => {
     const token = useAuth();
+    const [role ,setRole] =useState(''); 
     const { items, getTotal, clearCart } = useCartStore();
     const [isClient, setIsClient] = useState(false);
     const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ const Checkout = () => {
         zipcode: '',
     });
     const [isLoading, setIsLoading] = useState(false);
-    const [storeName ,setStoreName] =useState(''); // 
+    const [storeName ,setStoreName] =useState(''); 
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -54,6 +55,7 @@ const Checkout = () => {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                setRole(response.data.user.role); // Assuming the response contains user role
                 setName(response.data.user.name); // Assuming the response contains user name
                 setEmail(response.data.user.email); // Assuming the response contains user email
                 setContact(response.data.user.phone); // Assuming the response contains user contact number
@@ -113,6 +115,11 @@ const Checkout = () => {
             if (!token) {
                 alert('Please login to continue');
                 router.push('/login');
+                return;
+            }
+            if(role === "seller") {
+                toast.error("You are not authorized to place an order as a seller.");
+                setIsLoading(false);
                 return;
             }
 
